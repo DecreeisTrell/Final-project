@@ -1,7 +1,122 @@
+:root {
+  --yellow: #fff700;
+  --blue: #0b0bc2;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+body {
+  margin: 0;
+  background-image: url("images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: var(--black);
+  font-family: "Imbue", serif;
+  color: var(--yellow);
+}
+
+/* The faint sparkle layer that sits over the background (17% visible in Figma) */
+.sparkle-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.17;
+  z-index: -1;
+}
+
+/* Header and menu */
+.header {
+  padding: 40px 0 0 38px;
+}
+
+.menu-button {
+  width: 73px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.menu-bar {
+  width: 73px;
+  height: 9px;
+  margin-bottom: 8px;
+  background-color: var(--white);
+}
+
+.menu-list {
+  margin: 20px 0 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-link {
+  font-size: 32px;
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+/* Main content, stacked and centered */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 40px 50px 40px;
+}
+
+.question {
+  margin: 9px 0 0 0;
+  font-size: 48px;
+  text-align: center;
+}
+
+.experience {
+  margin: 0;
+  font-size: 48px;
+  text-align: center;
+}
+
+.title-image {
+  width: 808px;
+  max-width: 100%;
+  height: auto;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 64px;
+  text-align: center;
+}
+
+/* START button */
+.start-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 297px;
+  height: 85px;
+  margin-top: 40px;
+  background-color: var(--blue);
+  font-family: "Jersey 10", sans-serif;
+  font-size: 96px;
+  line-height: 85px;
+  color: var(--black);
+  text-decoration: none;
+}
+
 
 :root {
   --yellow: #fff700;
   --blue: #0b0bc2;
+  --menu-blue: #0e0e92;
+  --gold: #ffcb08;
+  --bright-yellow: #fff700;
+  --text-yellow: #fff600;
   --white: #ffffff;
   --black: #000000;
 }
@@ -34,10 +149,13 @@ body {
   padding: 40px 0 0 38px;
 }
  
+/* The hamburger button, with the default button look removed */
 .menu-button {
   width: 73px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
-  list-style: none;
 }
  
 .menu-bar {
@@ -47,19 +165,53 @@ body {
   background-color: var(--white);
 }
  
-.menu-list {
-  margin: 20px 0 0 0;
+/* The blue side panel. Clicking anywhere outside it closes it. */
+.menu-panel {
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 400px;
+  height: 100%;
+  margin: 0;
   padding: 0;
+  border: none;
+  background-color: var(--menu-blue);
+ 
+  /* Closed: parked off the left edge of the screen */
+  transform: translateX(-400px);
+  transition: transform 0.4s ease, overlay 0.4s allow-discrete, display 0.4s allow-discrete;
+}
+ 
+/* Open: slides in to the left edge */
+.menu-panel:popover-open {
+  transform: translateX(0);
+}
+ 
+/* Where the panel starts from when it first opens */
+@starting-style {
+  .menu-panel:popover-open {
+    transform: translateX(-400px);
+  }
+}
+ 
+.menu-list {
+  margin: 0;
+  padding: 243px 0 0 0;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 30px;
 }
  
 .menu-link {
-  font-size: 32px;
-  color: var(--yellow);
+  font-size: 48px;
+  color: var(--white);
   text-decoration: none;
+}
+ 
+.menu-link:hover {
+  color: var(--yellow);
 }
  
 /* Main content, stacked and centered */
@@ -72,6 +224,12 @@ body {
  
 .question {
   margin: 9px 0 0 0;
+  font-size: 48px;
+  text-align: center;
+}
+ 
+.experience {
+  margin: 0;
   font-size: 48px;
   text-align: center;
 }
@@ -102,4 +260,1547 @@ body {
   line-height: 85px;
   color: var(--black);
   text-decoration: none;
+}
+ 
+ 
+/* ===================== DESIGN PAGE ===================== */
+ 
+/* This page has a plain black background instead of the Home photo */
+.design-page {
+  background-image: none;
+  background-color: var(--black);
+}
+ 
+.design-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.05;
+  z-index: -1;
+}
+ 
+/* Gold lines used all over the page */
+.gold-line {
+  height: 2px;
+  margin: 0;
+  border: none;
+  background-color: var(--gold);
+}
+ 
+/* Top bar with logo, navigation, and name */
+.top-bar {
+  display: flex;
+}
+ 
+.logo-link {
+  width: 288px;
+  height: 110px;
+  flex-shrink: 0;
+}
+ 
+.logo {
+  display: block;
+  width: 307px;
+  margin: -10px 0 0 -10px;
+  transform: rotate(-11.64deg);
+}
+ 
+.top-bar-main {
+  flex: 1;
+  padding-right: 55px;
+}
+ 
+.top-bar-row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  margin-bottom: 37px;
+}
+ 
+.top-nav {
+  display: flex;
+  gap: 28px;
+  margin: 0 0 0 260px;
+  padding: 0;
+  list-style: none;
+}
+ 
+.top-link {
+  padding-bottom: 6px;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 36px;
+  color: var(--gold);
+  text-decoration: none;
+}
+ 
+.top-link-current {
+  font-weight: 500;
+  border-bottom: 2px solid var(--gold);
+}
+ 
+.top-bar-name {
+  margin: 6px 23px 0 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--white);
+}
+ 
+/* Two columns: character picker on the left, character card on the right */
+.character-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 23px;
+  padding: 193px 77px 0 32px;
+}
+ 
+.character-left {
+  width: 752px;
+  padding-top: 73px;
+}
+ 
+.select-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+ 
+.small-star {
+  width: 57px;
+  height: 54px;
+}
+ 
+.select-title {
+  margin: 0 9px 0 0;
+  font-size: 48px;
+  font-weight: normal;
+  color: var(--gold);
+}
+ 
+.short-line {
+  width: 124px;
+  flex-shrink: 0;
+}
+ 
+.name-row {
+  display: flex;
+  align-items: center;
+  margin-left: 58px;
+}
+ 
+.big-name {
+  margin: 0;
+  font-family: "Jersey 15", sans-serif;
+  font-size: 200px;
+  font-weight: normal;
+  line-height: 140px;
+  color: var(--white);
+}
+ 
+.big-star {
+  width: 96px;
+  height: 91px;
+}
+ 
+.intro {
+  width: 421px;
+  margin: 0 0 30px 58px;
+  font-size: 32px;
+  line-height: 30px;
+  color: var(--gold);
+}
+ 
+/* Thumbnail row with arrows */
+.thumb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.arrow {
+  display: block;
+  width: 40px;
+  height: 65px;
+}
+ 
+.thumb {
+  flex-shrink: 0;
+  padding: 5px;
+  border: 5px solid transparent;
+}
+ 
+.thumb-selected {
+  border-color: var(--bright-yellow);
+}
+ 
+.thumb-image {
+  display: block;
+  width: 147px;
+  height: 227px;
+}
+ 
+/* Character card on the right */
+.character-card {
+  display: flex;
+  box-sizing: border-box;
+  width: 844px;
+  height: 688px;
+  padding: 22px 0 0 20px;
+  border: 6px solid var(--bright-yellow);
+  background-color: var(--black);
+}
+ 
+.card-poster {
+  flex-shrink: 0;
+  width: 408px;
+  height: 632px;
+}
+ 
+.card-info {
+  flex-shrink: 0;
+  width: 345px;
+  margin-left: 46px;
+  padding-top: 45px;
+  font-family: "Jersey 15", sans-serif;
+  color: var(--text-yellow);
+}
+ 
+.card-name {
+  margin: 0;
+  font-size: 96px;
+  font-weight: normal;
+  line-height: 87px;
+}
+ 
+.card-line {
+  width: 270px;
+}
+ 
+.card-name + .card-line {
+  margin-top: 16px;
+}
+ 
+.card-stats {
+  margin: 13px 0 35px 0;
+  padding: 0;
+  list-style: none;
+  font-size: 40px;
+  line-height: 40px;
+}
+ 
+.card-story {
+  width: 268px;
+  margin: 20px 0 21px 0;
+  font-size: 24px;
+  line-height: 26px;
+}
+ 
+.select-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 307px;
+  height: 92px;
+  margin-top: 48px;
+  padding: 0 56px 0 45px;
+  border: 7px solid var(--bright-yellow);
+  background-color: var(--black);
+  font-size: 64px;
+  color: var(--text-yellow);
+  text-decoration: none;
+}
+ 
+.select-arrow {
+  width: 17px;
+  height: 28px;
+}
+ 
+/* Footer */
+.page-footer {
+  margin: 36px 58px 0 73px;
+  border-top: 2px solid var(--gold);
+}
+ 
+.footer-text {
+  margin: 9px 40px 30px 0;
+  font-size: 32px;
+  text-align: right;
+  color: var(--gold);
+}
+ 
+:root {
+  --yellow: #fff700;
+  --blue: #0b0bc2;
+  --menu-blue: #0e0e92;
+  --gold: #ffcb08;
+  --bright-yellow: #fff700;
+  --text-yellow: #fff600;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+body {
+  margin: 0;
+  background-image: url("images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: var(--black);
+  font-family: "Imbue", serif;
+  color: var(--yellow);
+}
+
+/* The faint sparkle layer that sits over the background (17% visible in Figma) */
+.sparkle-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.17;
+  z-index: -1;
+}
+
+/* Header and menu */
+.header {
+  padding: 40px 0 0 38px;
+}
+
+/* The hamburger button, with the default button look removed */
+.menu-button {
+  width: 73px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.menu-bar {
+  width: 73px;
+  height: 9px;
+  margin-bottom: 8px;
+  background-color: var(--white);
+}
+
+/* The blue side panel. Clicking anywhere outside it closes it. */
+.menu-panel {
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 400px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: var(--menu-blue);
+
+  /* Closed: parked off the left edge of the screen */
+  transform: translateX(-400px);
+  transition: transform 0.4s ease, overlay 0.4s allow-discrete, display 0.4s allow-discrete;
+}
+
+/* Open: slides in to the left edge */
+.menu-panel:popover-open {
+  transform: translateX(0);
+}
+
+/* Where the panel starts from when it first opens */
+@starting-style {
+  .menu-panel:popover-open {
+    transform: translateX(-400px);
+  }
+}
+
+.menu-list {
+  margin: 0;
+  padding: 243px 0 0 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.menu-link {
+  font-size: 48px;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.menu-link:hover {
+  color: var(--yellow);
+}
+
+/* Main content, stacked and centered */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 40px 50px 40px;
+}
+
+.question {
+  margin: 9px 0 0 0;
+  font-size: 48px;
+  text-align: center;
+}
+
+.experience {
+  margin: 0;
+  font-size: 48px;
+  text-align: center;
+}
+
+.title-image {
+  width: 808px;
+  max-width: 100%;
+  height: auto;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 64px;
+  text-align: center;
+}
+
+/* START button */
+.start-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 297px;
+  height: 85px;
+  margin-top: 40px;
+  background-color: var(--blue);
+  font-family: "Jersey 10", sans-serif;
+  font-size: 96px;
+  line-height: 85px;
+  color: var(--black);
+  text-decoration: none;
+}
+
+
+/* ===================== DESIGN PAGE ===================== */
+
+/* This page has a plain black background instead of the Home photo */
+.design-page {
+  background-image: none;
+  background-color: var(--black);
+}
+
+.design-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.05;
+  z-index: -1;
+}
+
+/* Gold lines used all over the page */
+.gold-line {
+  height: 2px;
+  margin: 0;
+  border: none;
+  background-color: var(--gold);
+}
+
+/* Top bar with logo, navigation, and name */
+.top-bar {
+  display: flex;
+}
+
+.logo-link {
+  width: 288px;
+  height: 110px;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: block;
+  width: 307px;
+  margin: -10px 0 0 -10px;
+  transform: rotate(-11.64deg);
+}
+
+.top-bar-main {
+  flex: 1;
+  padding-right: 55px;
+}
+
+.top-bar-row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  margin-bottom: 37px;
+}
+
+.top-nav {
+  display: flex;
+  gap: 28px;
+  margin: 0 0 0 260px;
+  padding: 0;
+  list-style: none;
+}
+
+.top-link {
+  padding-bottom: 6px;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 36px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.top-link-current {
+  font-weight: 500;
+  border-bottom: 2px solid var(--gold);
+}
+
+.top-bar-name {
+  margin: 6px 23px 0 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--white);
+}
+
+/* Two columns: character picker on the left, character card on the right */
+.character-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 23px;
+  padding: 193px 77px 0 32px;
+}
+
+.character-left {
+  width: 752px;
+  padding-top: 73px;
+}
+
+.select-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.small-star {
+  width: 57px;
+  height: 54px;
+}
+
+.select-title {
+  margin: 0 9px 0 0;
+  font-size: 48px;
+  font-weight: normal;
+  color: var(--gold);
+}
+
+.short-line {
+  width: 124px;
+  flex-shrink: 0;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  margin-left: 58px;
+}
+
+.big-name {
+  margin: 0;
+  font-family: "Jersey 15", sans-serif;
+  font-size: 200px;
+  font-weight: normal;
+  line-height: 140px;
+  color: var(--white);
+}
+
+.big-star {
+  width: 96px;
+  height: 91px;
+}
+
+.intro {
+  width: 421px;
+  margin: 0 0 30px 58px;
+  font-size: 32px;
+  line-height: 30px;
+  color: var(--gold);
+}
+
+/* Thumbnail row with arrows */
+.thumb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow {
+  display: block;
+  width: 40px;
+  height: 65px;
+}
+
+.thumb {
+  flex-shrink: 0;
+  padding: 5px;
+  border: 5px solid transparent;
+}
+
+.thumb-selected {
+  border-color: var(--bright-yellow);
+}
+
+.thumb-image {
+  display: block;
+  width: 147px;
+  height: 227px;
+}
+
+/* Character card on the right */
+.character-card {
+  display: flex;
+  box-sizing: border-box;
+  width: 844px;
+  height: 688px;
+  padding: 22px 0 0 20px;
+  border: 6px solid var(--bright-yellow);
+  background-color: var(--black);
+}
+
+.card-poster {
+  flex-shrink: 0;
+  width: 408px;
+  height: 632px;
+}
+
+.card-info {
+  flex-shrink: 0;
+  width: 345px;
+  margin-left: 46px;
+  padding-top: 45px;
+  font-family: "Jersey 15", sans-serif;
+  color: var(--text-yellow);
+}
+
+.card-name {
+  margin: 0;
+  font-size: 96px;
+  font-weight: normal;
+  line-height: 87px;
+}
+
+.card-line {
+  width: 270px;
+}
+
+.card-name + .card-line {
+  margin-top: 16px;
+}
+
+.card-stats {
+  margin: 13px 0 35px 0;
+  padding: 0;
+  list-style: none;
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.card-story {
+  width: 268px;
+  margin: 20px 0 21px 0;
+  font-size: 24px;
+  line-height: 26px;
+}
+
+.select-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 307px;
+  height: 92px;
+  margin-top: 48px;
+  padding: 0 56px 0 45px;
+  border: 7px solid var(--bright-yellow);
+  background-color: var(--black);
+  font-size: 64px;
+  color: var(--text-yellow);
+  text-decoration: none;
+}
+
+.select-arrow {
+  width: 17px;
+  height: 28px;
+}
+
+/* Footer */
+.page-footer {
+  margin: 36px 58px 0 73px;
+  border-top: 2px solid var(--gold);
+}
+
+.footer-text {
+  margin: 9px 40px 30px 0;
+  font-size: 32px;
+  text-align: right;
+  color: var(--gold);
+}
+
+:root {
+  --yellow: #fff700;
+  --blue: #0b0bc2;
+  --menu-blue: #0e0e92;
+  --gold: #ffcb08;
+  --bright-yellow: #fff700;
+  --text-yellow: #fff600;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+body {
+  margin: 0;
+  background-image: url("images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: var(--black);
+  font-family: "Imbue", serif;
+  color: var(--yellow);
+}
+
+/* The faint sparkle layer that sits over the background (17% visible in Figma) */
+.sparkle-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.17;
+  z-index: -1;
+}
+
+/* Header and menu */
+.header {
+  padding: 40px 0 0 38px;
+}
+
+/* The hamburger button, with the default button look removed */
+.menu-button {
+  width: 73px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.menu-bar {
+  width: 73px;
+  height: 9px;
+  margin-bottom: 8px;
+  background-color: var(--white);
+}
+
+/* The blue side panel. Clicking anywhere outside it closes it. */
+.menu-panel {
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 400px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: var(--menu-blue);
+
+  /* Closed: parked off the left edge of the screen */
+  transform: translateX(-400px);
+  transition: transform 0.4s ease, overlay 0.4s allow-discrete, display 0.4s allow-discrete;
+}
+
+/* Open: slides in to the left edge */
+.menu-panel:popover-open {
+  transform: translateX(0);
+}
+
+/* Where the panel starts from when it first opens */
+@starting-style {
+  .menu-panel:popover-open {
+    transform: translateX(-400px);
+  }
+}
+
+.menu-list {
+  margin: 0;
+  padding: 243px 0 0 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.menu-link {
+  font-size: 48px;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.menu-link:hover {
+  color: var(--yellow);
+}
+
+/* Main content, stacked and centered */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 40px 50px 40px;
+}
+
+.question {
+  margin: 9px 0 0 0;
+  font-size: 48px;
+  text-align: center;
+}
+
+.experience {
+  margin: 0;
+  font-size: 48px;
+  text-align: center;
+}
+
+.title-image {
+  width: 808px;
+  max-width: 100%;
+  height: auto;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 64px;
+  text-align: center;
+}
+
+/* START button */
+.start-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 297px;
+  height: 85px;
+  margin-top: 40px;
+  background-color: var(--blue);
+  font-family: "Jersey 10", sans-serif;
+  font-size: 96px;
+  line-height: 85px;
+  color: var(--black);
+  text-decoration: none;
+}
+
+
+/* ===================== DESIGN PAGE ===================== */
+
+/* This page has a plain black background instead of the Home photo */
+.design-page {
+  background-image: none;
+  background-color: var(--black);
+}
+
+.design-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.05;
+  z-index: -1;
+}
+
+/* Gold lines used all over the page */
+.gold-line {
+  height: 2px;
+  margin: 0;
+  border: none;
+  background-color: var(--gold);
+}
+
+/* Top bar with logo, navigation, and name */
+.top-bar {
+  display: flex;
+}
+
+.logo-link {
+  width: 288px;
+  height: 110px;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: block;
+  width: 307px;
+  margin: -10px 0 0 -10px;
+  transform: rotate(-11.64deg);
+}
+
+.top-bar-main {
+  flex: 1;
+  padding-right: 55px;
+}
+
+.top-bar-row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  margin-bottom: 37px;
+}
+
+.top-nav {
+  display: flex;
+  gap: 28px;
+  margin: 0 0 0 260px;
+  padding: 0;
+  list-style: none;
+}
+
+.top-link {
+  padding-bottom: 6px;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 36px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.top-link-current {
+  font-weight: 500;
+  border-bottom: 2px solid var(--gold);
+}
+
+.top-bar-name {
+  margin: 6px 23px 0 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--white);
+}
+
+/* Two columns: character picker on the left, character card on the right */
+.character-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 23px;
+  padding: 193px 77px 0 32px;
+}
+
+.character-left {
+  width: 752px;
+  padding-top: 73px;
+}
+
+.select-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.small-star {
+  width: 57px;
+  height: 54px;
+}
+
+.select-title {
+  margin: 0 9px 0 0;
+  font-size: 48px;
+  font-weight: normal;
+  color: var(--gold);
+}
+
+.short-line {
+  width: 124px;
+  flex-shrink: 0;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  margin-left: 58px;
+}
+
+.big-name {
+  margin: 0;
+  font-family: "Jersey 15", sans-serif;
+  font-size: 200px;
+  font-weight: normal;
+  line-height: 140px;
+  color: var(--white);
+}
+
+.big-star {
+  width: 96px;
+  height: 91px;
+}
+
+.intro {
+  width: 421px;
+  margin: 0 0 30px 58px;
+  font-size: 32px;
+  line-height: 30px;
+  color: var(--gold);
+}
+
+/* Thumbnail row with arrows */
+.thumb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow {
+  display: block;
+  width: 40px;
+  height: 65px;
+}
+
+.thumb {
+  flex-shrink: 0;
+  padding: 5px;
+  border: 5px solid transparent;
+}
+
+.thumb-selected {
+  border-color: var(--bright-yellow);
+}
+
+.thumb-image {
+  display: block;
+  width: auto;
+  height: 227px;
+}
+
+/* Character card on the right */
+.character-card {
+  display: flex;
+  box-sizing: border-box;
+  width: 844px;
+  height: 688px;
+  padding: 22px 0 0 20px;
+  border: 6px solid var(--bright-yellow);
+  background-color: var(--black);
+}
+
+.card-poster {
+  flex-shrink: 0;
+  width: auto;
+  height: 632px;
+}
+
+.card-info {
+  flex-shrink: 0;
+  width: 345px;
+  margin-left: 46px;
+  padding-top: 45px;
+  font-family: "Jersey 15", sans-serif;
+  color: var(--text-yellow);
+}
+
+.card-name {
+  margin: 0;
+  font-size: 96px;
+  font-weight: normal;
+  line-height: 87px;
+}
+
+.card-line {
+  width: 270px;
+}
+
+.card-name + .card-line {
+  margin-top: 16px;
+}
+
+.card-stats {
+  margin: 13px 0 35px 0;
+  padding: 0;
+  list-style: none;
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.card-story {
+  width: 268px;
+  margin: 20px 0 21px 0;
+  font-size: 24px;
+  line-height: 26px;
+}
+
+.select-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 307px;
+  height: 92px;
+  margin-top: 48px;
+  padding: 0 56px 0 45px;
+  border: 7px solid var(--bright-yellow);
+  background-color: var(--black);
+  font-size: 64px;
+  color: var(--text-yellow);
+  text-decoration: none;
+}
+
+.select-arrow {
+  width: 17px;
+  height: 28px;
+}
+
+/* Footer */
+.page-footer {
+  margin: 36px 58px 0 73px;
+  border-top: 2px solid var(--gold);
+}
+
+.footer-text {
+  margin: 9px 40px 30px 0;
+  font-size: 32px;
+  text-align: right;
+  color: var(--gold);
+}
+
+:root {
+  --yellow: #fff700;
+  --blue: #0b0bc2;
+  --menu-blue: #0e0e92;
+  --gold: #ffcb08;
+  --bright-yellow: #fff700;
+  --text-yellow: #fff600;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+body {
+  margin: 0;
+  background-image: url("images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: var(--black);
+  font-family: "Imbue", serif;
+  color: var(--yellow);
+}
+
+/* The faint sparkle layer that sits over the background (17% visible in Figma) */
+.sparkle-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.17;
+  z-index: -1;
+}
+
+/* Header and menu */
+.header {
+  padding: 40px 0 0 38px;
+}
+
+/* The hamburger button, with the default button look removed */
+.menu-button {
+  width: 73px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.menu-bar {
+  width: 73px;
+  height: 9px;
+  margin-bottom: 8px;
+  background-color: var(--white);
+}
+
+/* The blue side panel. Clicking anywhere outside it closes it. */
+.menu-panel {
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 400px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: var(--menu-blue);
+
+  /* Closed: parked off the left edge of the screen */
+  transform: translateX(-400px);
+  transition: transform 0.4s ease, overlay 0.4s allow-discrete, display 0.4s allow-discrete;
+}
+
+/* Open: slides in to the left edge */
+.menu-panel:popover-open {
+  transform: translateX(0);
+}
+
+/* Where the panel starts from when it first opens */
+@starting-style {
+  .menu-panel:popover-open {
+    transform: translateX(-400px);
+  }
+}
+
+.menu-list {
+  margin: 0;
+  padding: 243px 0 0 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.menu-link {
+  font-size: 48px;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.menu-link:hover {
+  color: var(--yellow);
+}
+
+/* Main content, stacked and centered */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 40px 50px 40px;
+}
+
+.question {
+  margin: 9px 0 0 0;
+  font-size: 48px;
+  text-align: center;
+}
+
+.experience {
+  margin: 0;
+  font-size: 48px;
+  text-align: center;
+}
+
+.title-image {
+  width: 808px;
+  max-width: 100%;
+  height: auto;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 64px;
+  text-align: center;
+}
+
+/* START button */
+.start-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 297px;
+  height: 85px;
+  margin-top: 40px;
+  background-color: var(--blue);
+  font-family: "Jersey 10", sans-serif;
+  font-size: 96px;
+  line-height: 85px;
+  color: var(--black);
+  text-decoration: none;
+}
+
+
+/* ===================== DESIGN PAGE ===================== */
+
+/* This page has a plain black background instead of the Home photo */
+.design-page {
+  background-image: none;
+  background-color: var(--black);
+}
+
+.design-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.05;
+  z-index: -1;
+}
+
+/* Gold lines used all over the page */
+.gold-line {
+  height: 2px;
+  margin: 0;
+  border: none;
+  background-color: var(--gold);
+}
+
+/* Top bar with logo, navigation, and name */
+.top-bar {
+  display: flex;
+}
+
+.logo-link {
+  width: 288px;
+  height: 110px;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: block;
+  width: 307px;
+  margin: -10px 0 0 -10px;
+  transform: rotate(-11.64deg);
+}
+
+.top-bar-main {
+  flex: 1;
+  padding-right: 55px;
+}
+
+.top-bar-row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  margin-bottom: 37px;
+}
+
+.top-nav {
+  display: flex;
+  gap: 28px;
+  margin: 0 0 0 260px;
+  padding: 0;
+  list-style: none;
+}
+
+.top-link {
+  padding-bottom: 6px;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 36px;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.top-link-current {
+  font-weight: 500;
+  border-bottom: 2px solid var(--gold);
+}
+
+.top-bar-name {
+  margin: 6px 23px 0 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--white);
+}
+
+/* Two columns: character picker on the left, character card on the right */
+.character-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 23px;
+  padding: 193px 77px 0 32px;
+}
+
+.character-left {
+  width: 752px;
+  padding-top: 73px;
+}
+
+.select-heading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.small-star {
+  width: 57px;
+  height: 54px;
+}
+
+.select-title {
+  margin: 0 9px 0 0;
+  font-size: 48px;
+  font-weight: normal;
+  color: var(--gold);
+}
+
+.short-line {
+  width: 124px;
+  flex-shrink: 0;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  width: 648px;
+  margin-left: 58px;
+}
+
+.big-name {
+  margin: 0;
+  font-family: "Jersey 15", sans-serif;
+  font-size: 200px;
+  font-weight: normal;
+  line-height: 140px;
+  color: var(--white);
+}
+
+.big-star {
+  flex-shrink: 0;
+  width: 96px;
+  height: 91px;
+  margin-left: auto;
+}
+
+.intro {
+  width: 421px;
+  margin: 0 0 30px 58px;
+  font-size: 32px;
+  line-height: 30px;
+  color: var(--gold);
+}
+
+/* Thumbnail row with arrows */
+.thumb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow {
+  display: block;
+  width: 40px;
+  height: 65px;
+}
+
+.thumb {
+  flex-shrink: 0;
+  padding: 5px;
+  border: 5px solid transparent;
+}
+
+.thumb-selected {
+  border-color: var(--bright-yellow);
+}
+
+.thumb-image {
+  display: block;
+  width: auto;
+  height: 227px;
+}
+
+/* Character card on the right */
+.character-card {
+  display: flex;
+  box-sizing: border-box;
+  width: 844px;
+  height: 688px;
+  padding: 22px 0 0 20px;
+  border: 6px solid var(--bright-yellow);
+  background-color: var(--black);
+}
+
+.card-poster {
+  flex-shrink: 0;
+  width: auto;
+  height: 632px;
+}
+
+.card-info {
+  flex-shrink: 0;
+  width: 345px;
+  margin-left: 46px;
+  padding-top: 45px;
+  font-family: "Jersey 15", sans-serif;
+  color: var(--text-yellow);
+}
+
+.card-name {
+  margin: 0;
+  font-size: 96px;
+  font-weight: normal;
+  line-height: 87px;
+}
+
+.card-line {
+  width: 270px;
+}
+
+.card-name + .card-line {
+  margin-top: 16px;
+}
+
+.card-stats {
+  margin: 13px 0 35px 0;
+  padding: 0;
+  list-style: none;
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.card-story {
+  width: 268px;
+  margin: 20px 0 21px 0;
+  font-size: 24px;
+  line-height: 26px;
+}
+
+.select-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 307px;
+  height: 92px;
+  margin-top: 48px;
+  padding: 0 56px 0 45px;
+  border: 7px solid var(--bright-yellow);
+  background-color: var(--black);
+  font-size: 64px;
+  color: var(--text-yellow);
+  text-decoration: none;
+}
+
+.select-arrow {
+  width: 17px;
+  height: 28px;
+}
+
+/* Footer */
+.page-footer {
+  margin: 36px 58px 0 73px;
+  border-top: 2px solid var(--gold);
+}
+
+.footer-text {
+  margin: 9px 40px 30px 0;
+  font-size: 32px;
+  text-align: right;
+  color: var(--gold);
 }
